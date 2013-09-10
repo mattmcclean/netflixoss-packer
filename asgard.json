@@ -1,0 +1,28 @@
+{
+        "builders": [
+                {
+                        "type": "amazon-ebs",
+                        "source_ami": "ami-02c82d75",
+			"ssh_username": "ubuntu",
+			"instance_type": "m1.small",
+                        "region": "eu-west-1",
+                        "ami_name": "packer-asgard {{timestamp}}"
+                }
+        ],
+
+        "provisioners": [
+                {
+                        "type": "chef-solo",
+			"cookbook_paths": ["cookbooks"],
+			"run_list": [ "asgard" ],
+			"json": {
+				"asgard": {
+					"aws_account_id": "123456789012",
+					"aws_access_key": "ABCDEFGHIJKLMNOPQRST",
+					"aws_secret_key": "ABCDEFGHIJKLMNOPQRST"
+				}
+			}
+                }
+        ]
+}
+

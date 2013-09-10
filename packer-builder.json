@@ -1,0 +1,25 @@
+{
+        "builders": [
+                {
+                        "type": "amazon-ebs",
+                        "source_ami": "ami-02c82d75",
+			"ssh_username": "ubuntu",
+			"instance_type": "m1.small",
+                        "region": "eu-west-1",
+                        "ami_name": "packer-builder {{timestamp}}"
+                }
+        ],
+
+        "provisioners": [
+                {
+                        "type": "shell",
+			"inline": [
+				"sleep 10",
+				"sudo apt-get update -y",
+				"sudo apt-get install -y git",
+				"curl -L https://www.opscode.com/chef/install.sh | sudo bash"
+			]
+                }
+        ]
+}
+
