@@ -1,0 +1,12 @@
+grails {
+        awsAccounts=['<%= node[:asgard][:aws_account_id] %>']
+        awsAccountNames=['<%= node[:asgard][:aws_account_id] %>':'<%= node[:asgard][:aws_env_name] %>']
+}
+secret {
+        accessId='<%= node[:asgard][:aws_access_key] %>'
+        secretKey='<%= node[:asgard][:aws_secret_key] %>'
+}
+cloud {
+        accountName='<%= node[:asgard][:aws_env_name] %>'
+        publicResourceAccounts=['amazon']
+}

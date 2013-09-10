@@ -1,0 +1,16 @@
+#!upstart
+# my upstart asgard script
+# this script will start/stop my asgard
+# optional stuff
+description "Asgard Server"
+
+# configuration variables.
+# You'll want to change thse as needed
+env USER=asgard
+
+start on (local-filesystems and net-device-up IFACE!=lo)
+stop on shutdown
+
+respawn
+
+exec sudo -u $USER sh -c "java <%= node[:asgard][:java_options]%> -jar <%= node[:asgard][:base_dir]%>/asgard_standalone.jar 2>&1 >> <%= node[:asgard][:log_dir]%>/asgard.log"
