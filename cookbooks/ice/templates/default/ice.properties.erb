@@ -9,9 +9,6 @@
 ice.processor=<%= node['ice']['processor']['enabled'] ? 'true' : 'false' %>
 ice.processor.localDir=<%= node['ice']['processor']['local_dir'] %>
 
-ice.billing_s3bucketname=<%= node['ice']['billing_s3_bucket_name'] %>
-ice.billing_s3bucketprefix=<%= node['ice']['billing_s3_bucket_prefix'] %>
-
 ice.reader=<%= node['ice']['reader']['enabled'] ? 'true' : 'false' %>
 ice.reader.localDir=<%= node['ice']['reader']['local_dir'] %>
 
@@ -20,24 +17,19 @@ ice.work_s3bucketprefix=<%= node['ice']['work_s3_bucket_prefix'] %>
 
 ice.startmillis=<%= node['ice']['start_millis'] %>
 
-<% node['ice']['accounts'].each do |account| %>
-ice.account.<%= account[0] %>=<%= account[1] %>
-<% end %>
-
 <% if node['ice']['payer_accounts'].any? %>
-ice.billing_s3bucketname.<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3_bucketname')}.compact}.join(',') %>
-ice.billing_s3bucketprefix.<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3bucketprefix')}.compact}.join(',') %>
-ice.billing_payerAccountId.<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='accountid')}.compact}.join(',') %>
-ice.billing_accessRoleName.<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='access_role_name')}.compact}.join(',') %>
+ice.billing_s3bucketname=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3_bucketname')}.compact}.join(',') %>
+ice.billing_s3bucketprefix=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3_bucketprefix')}.compact}.join(',') %>
+ice.billing_payerAccountId=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='accountid')}.compact}.join(',') %>
+ice.billing_accessRoleName=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='access_role_name')}.compact}.join(',') %>
 
-ice.account.<%= node['ice']['payer_accounts']['name'] %>=<%= node['ice']['payer_accounts']['accountid'] %>
-
-<% if node['ice']['payer_accounts']['linked_accounts'].any? %>
-
-<% node['ice']['payer_accounts']['linked_accounts'].each do |account| %>
+<% node['ice']['payer_accounts'].each do |account| %>
 ice.account.<%= account['name'] %>=<%= account['accountid'] %>
+<% if account['linked_accounts'].any? %>
+<% account['linked_accounts'].each do |linked_account| %>
+ice.account.<%= linked_account['name'] %>=<%= linked_account['accountid'] %>
 <% end %>
-
+<% end %>
 <% end %>
 <% end %>
 

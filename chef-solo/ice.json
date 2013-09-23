@@ -3,60 +3,60 @@
 	"ice": {
 		"payer_accounts": [ {
 			"name": "Account1",
-			"accountid": "",
-			"billing_s3_bucketname": "",
-			"billing_s3_bucketprefix": "",
-			"access_role_name": "",
+			"accountid": "1111111111",
+			"billing_s3_bucketname": "somebucket",
+			"billing_s3_bucketprefix": "someprefix",
+			"access_role_name": "ice",
 			"linked_accounts": [
 				{
-					"name": "",
-					"accountid": ""
+					"name": "Sub1",
+					"accountid": "122222222"
 				},
 				{
-					"name": "",
-					"accountid": ""
+					"name": "Sub2",
+					"accountid": "13333333333"
 				},
 				{
-					"name": "",
-					"accountid": ""
+					"name": "Sub3",
+					"accountid": "14444444444"
 				},
 				{
-					"name": "",
-					"accountid": ""
+					"name": "Sub4",
+					"accountid": "155555555555"
 				}
 			]
 		},
 		{
 			"name": "Account2",
-			"accountid": "",
-			"billing_s3_bucketname": "",
-			"billing_s3_bucketprefix": "",
-			"access_role_name": "",
+			"accountid": "22222222222222222",
+			"billing_s3_bucketname": "bucket2",
+			"billing_s3_bucketprefix": "prefix2",
+			"access_role_name": "ice",
 			"linked_accounts": [
 				{
-					"name": "",
-					"accountid": ""
+					"name": "2sub1",
+					"accountid": "211111"
 				},
 				{
-					"name": "",
-					"accountid": ""
+					"name": "2sub2",
+					"accountid": "2222222"
 				}
 			]
 		},
 		{
 			"name": "Account3",
-			"accountid": "",
-			"billing_s3_bucketname": "",
-			"billing_s3_bucketprefix": "",
-			"access_role_name": "",
+			"accountid": "3333333333",
+			"billing_s3_bucketname": "bucket3",
+			"billing_s3_bucketprefix": "suffix3",
+			"access_role_name": "ice",
 			"linked_accounts": [
 				{
-					"name": "",
-					"accountid": ""
+					"name": "3sub1",
+					"accountid": "31111111111"
 				},
 				{
-					"name": "",
-					"accountid": ""
+					"name": "3sub2",
+					"accountid": "32222222222"
 				}
 			]
 		}

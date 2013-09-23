@@ -19,15 +19,9 @@ end
 
 user "ice" do
   comment "ice system user"
-  home "/home/ice"
+  home node[:ice][:home_dir]
   system true
   shell "/bin/false"
-end
-
-directory node[:ice][:base_dir] do
-  owner "root"
-  mode 0755
-  action :create
 end
 
 directory node[:ice][:log_dir] do
@@ -48,13 +42,6 @@ directory node[:ice][:reader][:local_dir] do
   action :create
 end
 
-directory node[:ice][:home_dir] do
-  owner "ice"
-  mode 0755
-  action :create
-  recursive true
-end
-
 ark "grails" do
   url "https://mmcclean-sw-assets.s3.amazonaws.com/grails-2.2.1.zip"
   version "2.2.1"
@@ -62,12 +49,17 @@ ark "grails" do
   action :install
 end
 
-#execute "create_grails_env" do
-#  command "echo \"GRAILS_HOME=/usr/local/grails\" | sudo tee /etc/profile.d/grails.sh && sudo chmod 777 /etc/profile.d/grails.sh"
-#  not_if { ::File.exists?("/etc/profile.d/grails.sh") }
-#  user "root"
-#  action :run
-#end
+ENV['GRAILS_HOME'] = node[:grails][:home_dir]
+file "/etc/profile.d/grails.sh" do
+  content "export GRAILS_HOME=#{node[:grails][:home_dir]}"
+  mode 0755
+end
+
+ENV['ICE_HOME'] = node[:ice][:home_dir]
+file "/etc/profile.d/ice.sh" do
+  content "export ICE_HOME=#{node[:ice][:home_dir]}"
+  mode 0755
+end
 
 ark "ice" do
   url "https://github.com/Netflix/ice/tarball/master"
@@ -79,8 +71,8 @@ end
 
 execute "setup_grails" do
   command "grails wrapper 2>&1 >> /var/log/ice/grails-wrapper.log"
-  cwd "/usr/local/ice"
-  environment 'GRAILS_HOME' => "/usr/local/grails"
+  cwd node[:ice][:home_dir]
+  environment 'GRAILS_HOME' => node[:grails][:home_dir]
   user "ice"
   action :run
   not_if { ::File.exists?("/home/ice/.grails")}
@@ -96,6 +88,14 @@ template "ice.upstart.conf" do
   source "ice.upstart.conf.erb"
   owner "root"
   group "root"
+  mode "0644"
+  notifies :restart, resources(:service => "ice")
+end
+
+template "ice.properties" do
+  path "#{node[:ice][:home_dir]}/src/java/ice.properties"
+  source "ice.properties.erb"
+  owner "ice"
   mode "0644"
   notifies :restart, resources(:service => "ice")
 end
