@@ -22,6 +22,6 @@
 [submodule "cookbooks/tomcat"]
 	path = cookbooks/tomcat
 	url = https://github.com/opscode-cookbooks/tomcat.git
-[submodule "cookbooks/ice"]
-	path = cookbooks/ice
-	url = https://github.com/mdsol/ice_cookbook.git
+[submodule "cookbooks/ark"]
+	path = cookbooks/ark
+	url = https://github.com/opscode-cookbooks/ark.git
