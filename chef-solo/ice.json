@@ -1,8 +1,8 @@
 {
-	"run_list": [ "ice_custom" ],
+	"run_list": [ "ice" ],
 	"ice": {
 		"payer_accounts": [ {
-			"name": "BP",
+			"name": "Account1",
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
@@ -27,7 +27,7 @@
 			]
 		},
 		{
-			"name": "Kantar",
+			"name": "Account2",
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
@@ -44,7 +44,7 @@
 			]
 		},
 		{
-			"name": "Channel4",
+			"name": "Account3",
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
