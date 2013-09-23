@@ -4,6 +4,10 @@ package "nginx" do
   action :install
 end
 
+package "unzip" do
+  action :install
+end
+
 cookbook_file "#{node[:nginx][:conf_dir]}/nginx.conf" do
   source "nginx.conf"
   owner "root"
@@ -30,13 +34,13 @@ directory node[:ice][:log_dir] do
   action :create
 end
 
-directory node[:ice][:processor][:log_dir] do
+directory node[:ice][:processor][:local_dir] do
   owner "ice"
   mode 0755
   action :create
 end
 
-directory node[:ice][:reader][:log_dir] do
+directory node[:ice][:reader][:local_dir] do
   owner "ice"
   mode 0755
   action :create

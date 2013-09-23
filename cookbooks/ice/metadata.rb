@@ -7,4 +7,6 @@ recipe		"ice", "Installs the Netflix ICE server"
 
 supports	"ubuntu"
 
-depends "ark, java"
+depends "ark"
+depends "java"
+
