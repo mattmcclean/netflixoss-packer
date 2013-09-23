@@ -25,3 +25,6 @@
 [submodule "cookbooks/ark"]
 	path = cookbooks/ark
 	url = https://github.com/opscode-cookbooks/ark.git
+[submodule "cookbooks/sudo"]
+	path = cookbooks/sudo
+	url = https://github.com/opscode-cookbooks/sudo.git

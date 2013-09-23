@@ -1,4 +1,5 @@
 include_recipe "java::oracle"
+include_recipe "sudo"
 
 package "nginx" do
   action :install
@@ -18,6 +19,7 @@ end
 
 user "ice" do
   comment "ice system user"
+  home "/home/ice"
   system true
   shell "/bin/false"
 end
@@ -55,6 +57,33 @@ end
 
 ark "grails" do
   url "https://mmcclean-sw-assets.s3.amazonaws.com/grails-2.2.1.zip"
+  version "2.2.1"
+  has_binaries [ 'bin/grails', 'bin/grails-debug', 'bin/startGrails' ]
+  action :install
+end
+
+#execute "create_grails_env" do
+#  command "echo \"GRAILS_HOME=/usr/local/grails\" | sudo tee /etc/profile.d/grails.sh && sudo chmod 777 /etc/profile.d/grails.sh"
+#  not_if { ::File.exists?("/etc/profile.d/grails.sh") }
+#  user "root"
+#  action :run
+#end
+
+ark "ice" do
+  url "https://github.com/Netflix/ice/tarball/master"
+  owner "ice"
+  extension "tar.gz"
+  version "master"
+  action :install
+end
+
+execute "setup_grails" do
+  command "grails wrapper 2>&1 >> /var/log/ice/grails-wrapper.log"
+  cwd "/usr/local/ice"
+  environment 'GRAILS_HOME' => "/usr/local/grails"
+  user "ice"
+  action :run
+  not_if { ::File.exists?("/home/ice/.grails")}
 end
 
 service "ice" do

@@ -7,10 +7,13 @@ description "ICE Server"
 # configuration variables.
 # You'll want to change thse as needed
 env USER=ice
+export JAVA_HOME=/usr/lib/jvm/default-java
+export GRAILS_HOME=/usr/local/grails
 
 start on (local-filesystems and net-device-up IFACE!=lo)
 stop on shutdown
 
 respawn
 
-exec sudo -u $USER sh -c "java <%= node[:ice][:java_options]%> -jar <%= node[:ice][:base_dir]%>/asgard_standalone.jar 2>&1 >> <%= node[:ice][:log_dir]%>/ice.log"
+chdir /usr/local/ice
+exec sudo -u $USER sh -c "./grailsw run-app 2>&1 >> /var/log/ice/ice.log"

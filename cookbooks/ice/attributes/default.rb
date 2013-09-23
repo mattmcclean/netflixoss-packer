@@ -24,3 +24,9 @@ default[:java][:jdk_version] = 6
 default[:java][:oracle][:accept_oracle_download_terms] = true
 
 default[:nginx][:conf_dir] = "/etc/nginx"
+
+default[:authorization][:sudo][:sudoers_defaults] = [
+	'env_reset',
+	'secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"',
+	'env_keep = "JAVA_HOME GRAILS_HOME"'
+]
