@@ -1,10 +1,12 @@
 {
+	"run_list": [ "ice_custom" ],
 	"ice": {
 		"payer_accounts": [ {
 			"name": "BP",
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
+			"access_role_name": "",
 			"linked_accounts": [
 				{
 					"name": "",
@@ -29,6 +31,7 @@
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
+			"access_role_name": "",
 			"linked_accounts": [
 				{
 					"name": "",
@@ -45,6 +48,7 @@
 			"accountid": "",
 			"billing_s3_bucketname": "",
 			"billing_s3_bucketprefix": "",
+			"access_role_name": "",
 			"linked_accounts": [
 				{
 					"name": "",
