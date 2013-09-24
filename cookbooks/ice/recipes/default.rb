@@ -1,5 +1,6 @@
 include_recipe "java::oracle"
 include_recipe "sudo"
+include_recipe "htpasswd"
 
 package "nginx" do
   action :install
@@ -76,12 +77,12 @@ ark "ice" do
 end
 
 execute "setup_grails" do
-  command "grails wrapper 2>&1 >> /var/log/ice/grails-wrapper.log"
+  command "grails wrapper 2>&1 >> #{node[:ice][:log_dir]}/grails-wrapper.log"
   cwd node[:ice][:home_dir]
   environment 'GRAILS_HOME' => node[:grails][:home_dir]
   user "ice"
   action :run
-  not_if { ::File.exists?("/home/ice/.grails")}
+  not_if { ::File.exists?("#{node[:ice][:home_dir]}/.grails")}
 end
 
 service "ice" do
@@ -106,8 +107,16 @@ template "ice.properties" do
   notifies :restart, resources(:service => "ice")
 end
 
+execute "setup_ice" do
+  command "./grailsw run-app"
+  cwd node[:ice][:home_dir]
+  environment 'GRAILS_HOME' => node[:grails][:home_dir]
+  user "ice"
+  action :run
+end
+
 service "ice" do
-  action [:enable, :start]
+  action [:enable, :stop]
 end
 
 service "nginx" do
