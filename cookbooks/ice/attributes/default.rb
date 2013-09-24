@@ -24,6 +24,8 @@ default[:java][:jdk_version] = 6
 default[:java][:oracle][:accept_oracle_download_terms] = true
 
 default[:nginx][:conf_dir] = "/etc/nginx"
+default[:nginx][:username] = "foo"
+default[:nginx][:password] = "bar"
 
 default[:authorization][:sudo][:sudoers_defaults] = [
 	'env_reset',

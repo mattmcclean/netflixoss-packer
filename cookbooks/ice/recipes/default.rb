@@ -8,8 +8,8 @@ end
 
 # add user "foo" with password "bar" to "/etc/nginx/htpassword"
 htpasswd "#{node[:nginx][:conf_dir]}/htpassword" do
-  user "foo"
-  password "bar"
+  user node[:nginx][:username]
+  password node[:nginx][:password]
 end
 
 package "unzip" do

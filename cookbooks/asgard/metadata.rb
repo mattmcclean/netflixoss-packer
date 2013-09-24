@@ -8,3 +8,4 @@ recipe		"asgard", "Installs the standalone Asgard jar"
 supports	"ubuntu"
 
 depends "java"
+depends "htpasswd"

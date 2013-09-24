@@ -17,6 +17,13 @@ ice.work_s3bucketprefix=<%= node['ice']['work_s3_bucket_prefix'] %>
 
 ice.startmillis=<%= node['ice']['start_millis'] %>
 
+<% if !node['ice']['s3AccessKeyId'].nil? %>
+ice.s3AccessKeyId=<%= node['ice']['s3AccessKeyId'] %>
+<% end %>
+<% if !node['ice']['s3SecretKey'].nil? %>
+ice.s3SecretKey=<%= node['ice']['s3SecretKey'] %>
+<% end %>
+
 <% if !node['ice']['payer_accounts'].nil? && node['ice']['payer_accounts'].any? %>
 ice.billing_s3bucketname=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3_bucketname')}.compact}.join(',') %>
 ice.billing_s3bucketprefix=<%= node['ice']['payer_accounts'].map{|x| x.map {|k,v| "#{v}" if (k=='billing_s3_bucketprefix')}.compact}.join(',') %>

@@ -1,4 +1,5 @@
 include_recipe "java::oracle"
+include_recipe "htpasswd"
 
 package "nginx" do
   action :install
@@ -10,6 +11,12 @@ cookbook_file "#{node[:nginx][:conf_dir]}/nginx.conf" do
   group "root"
   mode 0755
   action :create
+end
+
+# add user "foo" with password "bar" to "/etc/nginx/htpassword"
+htpasswd "#{node[:nginx][:conf_dir]}/htpassword" do
+  user node[:nginx][:username]
+  password node[:nginx][:password]
 end
 
 user "asgard" do
