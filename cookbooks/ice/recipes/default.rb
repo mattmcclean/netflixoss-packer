@@ -96,7 +96,6 @@ template "ice.upstart.conf" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, resources(:service => "ice")
 end
 
 template "ice.properties" do
@@ -104,15 +103,6 @@ template "ice.properties" do
   source "ice.properties.erb"
   owner "ice"
   mode "0644"
-  notifies :restart, resources(:service => "ice")
-end
-
-execute "setup_ice" do
-  command "./grailsw run-app"
-  cwd node[:ice][:home_dir]
-  environment 'GRAILS_HOME' => node[:grails][:home_dir]
-  user "ice"
-  action :run
 end
 
 service "ice" do
