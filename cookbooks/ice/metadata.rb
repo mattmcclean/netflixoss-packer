@@ -10,4 +10,5 @@ supports	"ubuntu"
 depends "sudo"
 depends "ark"
 depends "java"
+depends "htpasswd"
 

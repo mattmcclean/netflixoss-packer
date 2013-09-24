@@ -5,6 +5,12 @@ package "nginx" do
   action :install
 end
 
+# add user "foo" with password "bar" to "/etc/nginx/htpassword"
+htpasswd "#{node[:nginx][:conf_dir]}/htpassword" do
+  user "foo"
+  password "bar"
+end
+
 package "unzip" do
   action :install
 end

@@ -28,3 +28,6 @@
 [submodule "cookbooks/sudo"]
 	path = cookbooks/sudo
 	url = https://github.com/opscode-cookbooks/sudo.git
+[submodule "cookbooks/htpasswd"]
+	path = cookbooks/htpasswd
+	url = https://github.com/Youscribe/htpasswd-cookbook.git
