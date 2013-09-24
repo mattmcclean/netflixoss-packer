@@ -1,0 +1,33 @@
+{
+        "builders": [
+                {
+                        "type": "amazon-ebs",
+                        "source_ami": "ami-02c82d75",
+			"ssh_username": "ubuntu",
+			"instance_type": "m1.small",
+                        "region": "eu-west-1",
+                        "ami_name": "packer-ice-reader {{timestamp}}"
+                }
+        ],
+
+        "provisioners": [
+                {
+                        "type": "chef-solo",
+			"cookbook_paths": ["cookbooks"],
+			"run_list": [ "ice" ],
+			"json": {
+				"ice": {
+					"reader" : {
+						"enabled": true
+					},
+					"processor": {
+						"enabled": false
+					},
+					"work_s3_bucket_name": "mmcclean-ice-demo-work",
+					"work_s3_bucket_prefix": "output"
+				}
+			}
+                }
+        ]
+}
+

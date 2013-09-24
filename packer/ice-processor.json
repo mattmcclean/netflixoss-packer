@@ -1,0 +1,30 @@
+{
+        "builders": [
+                {
+                        "type": "amazon-ebs",
+                        "source_ami": "ami-02c82d75",
+			"ssh_username": "ubuntu",
+			"instance_type": "m1.small",
+                        "region": "eu-west-1",
+                        "ami_name": "packer-ice-processor {{timestamp}}"
+                }
+        ],
+
+        "provisioners": [
+                {
+                        "type": "chef-solo",
+			"cookbook_paths": ["cookbooks"],
+			"run_list": [ "ice" ],
+			"json": {
+				"ice": {
+					"processor": {
+						"enabled": true
+					},
+					"reader": {
+						"enabled": false
+					}
+			}
+                }
+        ]
+}
+
