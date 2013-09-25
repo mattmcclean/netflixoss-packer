@@ -1,0 +1,17 @@
+#!upstart
+# my upstart Simian Army script
+# this script will start/stop the Simian Army
+# optional stuff
+description "Simian Army"
+
+# configuration variables.
+# You'll want to change thse as needed
+
+start on filesystem and started networking
+
+respawn
+setuid <%= node['simian_army']['user'] %>
+env JAVA_HOME=<%= node['java']['java_home'] %>
+chdir <%= node['simian_army']['home_dir'] %>
+exec ./gradlew jettyRun 2>&1 >> <%= node['simian_army']['log_dir'] %>/simianarmy.log
+
