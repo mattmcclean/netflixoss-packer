@@ -1,8 +1,8 @@
 {
 	"run_list": [ "simian_army" ],
 	"simian_army": {
-		"": {
-
+		"aws": {
+			"assumeRoleArn": "arn:aws:iam::AWS_ACCOUNT:role/ROLE_NAME"
 		}
 	}
 }
