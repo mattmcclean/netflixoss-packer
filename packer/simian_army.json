@@ -1,0 +1,28 @@
+{
+        "builders": [
+                {
+                        "type": "amazon-ebs",
+                        "source_ami": "ami-02c82d75",
+			"ssh_username": "ubuntu",
+			"instance_type": "m1.small",
+                        "region": "eu-west-1",
+                        "ami_name": "packer-simian-army-{{timestamp}}"
+                }
+        ],
+
+        "provisioners": [
+                {
+                        "type": "chef-solo",
+			"cookbook_paths": ["cookbooks"],
+			"run_list": [ "simian_army" ],
+			"json": {
+				"simian_army": {
+					"aws": {
+						"assumeRoleArn": "arn:aws:iam::AWS_ACCOUNT:role/ROLE_NAME"
+					}
+				}
+			}
+                }
+        ]
+}
+
