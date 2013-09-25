@@ -6,11 +6,10 @@ description "Asgard Server"
 
 # configuration variables.
 # You'll want to change thse as needed
-env USER=asgard
 
-start on (local-filesystems and net-device-up IFACE!=lo)
-stop on shutdown
+start on filesystem and started networking
 
 respawn
-
-exec sudo -u $USER sh -c "java <%= node[:asgard][:java_options]%> -jar <%= node[:asgard][:base_dir]%>/asgard_standalone.jar 2>&1 >> <%= node[:asgard][:log_dir]%>/asgard.log"
+setuid asgard
+env JAVA_HOME=<%= node['java']['java_home'] %>
+exec java <%= node[:asgard][:java_options]%> -jar <%= node[:asgard][:base_dir]%>/asgard_standalone.jar 2>&1 >> <%= node[:asgard][:log_dir]%>/asgard.log

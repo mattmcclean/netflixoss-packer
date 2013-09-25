@@ -99,8 +99,6 @@ default[:simian_army][:conformity][:rule][:InstanceHasStatusUrl][:enabled] = fal
 default[:simian_army][:conformity][:rule][:InstanceHasHealthCheckUrl][:enabled] = false
 default[:simian_army][:conformity][:rule][:CheckSoloInstances][:enabled] = true
 
-default[:grails][:home_dir] = "/usr/local/grails"
-
 default[:java][:jdk_version] = 6
 default[:java][:oracle][:accept_oracle_download_terms] = true
 

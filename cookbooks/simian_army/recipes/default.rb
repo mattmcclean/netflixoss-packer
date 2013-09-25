@@ -4,6 +4,10 @@ package "unzip" do
   action :install
 end
 
+package "git" do
+  action :install
+end
+
 user node[:simian_army][:user] do
   comment "simian army user"
   home node[:simian_army][:home_dir]
