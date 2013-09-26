@@ -44,7 +44,7 @@ default[:simian_army][:janitor][:notification][:sourceEmail] = "foo@bar.com"
 default[:simian_army][:janitor][:notification][:defaultEmail] = "foo@bar.com"
 default[:simian_army][:janitor][:notification][:daysBeforeTermination] = 2
 default[:simian_army][:janitor][:summary][:emailTo] = "foo@bar.com"
-default[:simian_army][:janitor][:enabledResources] = "Instance, ASG, EBS_Volume, EBS_Snapshot, Launch_Config, Image"
+default[:simian_army][:janitor][:enabledResources] = "Instance, ASG, EBS_Volume, EBS_Snapshot, Launch_Config"
 
 default[:simian_army][:janitor][:rule][:orphanedInstanceRule][:enabled] = true
 default[:simian_army][:janitor][:rule][:orphanedInstanceRule][:instanceAgeThreshold] = 2
@@ -71,7 +71,7 @@ default[:simian_army][:janitor][:rule][:oldUnusedLaunchConfigRule][:enabled] = t
 default[:simian_army][:janitor][:rule][:oldUnusedLaunchConfigRule][:ageThreshold] = 4
 default[:simian_army][:janitor][:rule][:oldUnusedLaunchConfigRule][:retentionDays] = 3
 
-default[:simian_army][:janitor][:rule][:unusedImageRule][:enabled] = true
+default[:simian_army][:janitor][:rule][:unusedImageRule][:enabled] = false
 default[:simian_army][:janitor][:rule][:unusedImageRule][:lastReferenceDaysThreshold] = 45
 default[:simian_army][:janitor][:rule][:unusedImageRule][:retentionDays] = 3
 default[:simian_army][:janitor][:rule][:image_crawler_lookbackdays] = 60
